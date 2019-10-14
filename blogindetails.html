@@ -1,0 +1,43 @@
+<span style="color:red;">{{error.errorMsg}}</span>
+<div class="panel pane-info">
+	<div class="panel-heading">
+		<b>BLog Title:</b>{{blogPost.blogTitle}}<br> 
+		<b>Posted By:</b>{{blogPost.postedBy.firstname}} &nbsp; {{blogPost.postedBy.lastname}}<br> <b>POsted
+			On:</b>{{blogPost.postedOn | date:'dd:MM:yyyy'}}<br>
+			<img src="http://localhost:8085/Project2middleware/getimage?email={{blogPost.postedBy.email}}" alt="No Image" height="50px" width="50px"><br>
+	</div>
+	<div class="panel-body">
+		<p ng-bind-html="content"></p>
+		Likes:{{blogPost.likes}} &nbsp; DisLikes:{{blogPost.dislikes}}<br>
+		<a href="" ng-click="incLike(blogPost)"><span class="glyphicon glyphicon-thumbs-up" title="Like"></span></a>
+		<a href="" ng-click="dcrLike(blogPost)"><span class="glyphicon glyphicon-thumbs-down" title="DisLike"></span></a><br>
+
+<br>
+<b>Comments</b>
+<textarea rows="3" cols="30" ng-model="commentTxt" name="commentTxt" required>
+
+</textarea><span style="color:red;">{{error}}</span>
+<br><button class="btn btn-info" ng-click="addBlogComment(blogPost,commentTxt)">Post Comment</button>
+<br>
+<div ng-hide="blogComment.commentTxt==undefined">
+<b>{{blogComment.commentTxt}}, &nbsp; By:-You{{blogComment.commentedBy.email}}, &nbsp; commentedOn:{{blogComment.commentedOn | date:'dd:MM:yyyy'}}</b>
+</div>
+
+<br><a href="" ng-click="getBlogComments(blogPost.id)">View All Comments</a> &nbsp; <span style="color:purple;">{{msg}}</span><br>
+<ul style="list-style:none"><span style="float:center;" ng-show="blogComments==''">There is no comments, you are the first one to comment is blog!</span>
+<li ng-repeat="blogComment in blogComments | orderBy:'-commentedOn'">
+<b>{{blogComment.commentTxt}}</b>
+<b>commentedBy -
+<span ng-if="user.email!=blogComment.commentedBy.email">{{blogComment.commentedBy.email}},</span>
+<span ng-if="user.email==blogComment.commentedBy.email">You</span>
+  , commentedOn - {{blogComment.commentedOn | date:'yyyy:MM:dd:mm:ss'}}</b>
+  
+  <a href="" ng-click="deleteBlogComment(blogComment)"><span ng-show="user.email==blogComment.commentedBy.email" class="pull-right glyphicon glyphicon-trash" title="Delete This Comment"></span></a> 
+  <hr>
+</l i>
+</ul>
+
+<br><a href="#/getblogs">Get all blogs</a>
+
+	</div>	
+</div>

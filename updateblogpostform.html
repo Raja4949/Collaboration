@@ -1,0 +1,18 @@
+<span style="color:red;">{{error.errorMsg}}</span>
+Blog Post Form
+<form>
+	<table>
+		<tr>
+			<td>Enter Blog Title</td>
+			<td><input type="text" ng-model="blogPost.blogTitle" required disabled></td>
+		</tr>
+		<tr>
+			<td>Enter Blog Content</td>
+			<td><textarea rows=3 ng-model="blogPost.blogContent">			
+			</textarea></td>
+		</tr>
+		<tr>			
+			<td><button ng-click="updateBlogPost(blogPost)">Add Blog Post</button></td>
+		</tr>
+	</table>
+</form>
